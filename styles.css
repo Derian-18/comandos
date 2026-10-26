@@ -1,0 +1,58 @@
+body{
+    background-color: #1c1b1b;
+    color: #f5f5f5;
+}
+
+h1{
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 2rem;
+}
+
+.seccion{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.card-frameworks{
+    background-color: #1b1b44;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    width: 300px;
+    text-align: center;
+}
+
+.card-lenguajes{
+    background-color: #1b1b44;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    width: 300px;
+    text-align: center;
+}
+
+.card-herramientas{
+    background-color: #1b1b44;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    width: 300px;
+    text-align: center;
+}
+
+footer{
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #1b1b44;
+    color: #f5f5f5;
+}
