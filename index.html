@@ -1,98 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comandos</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comandos Esenciales · Lenguajes, Frameworks y Herramientas</title>
+  <meta name="description" content="Cheat sheet con comandos esenciales para desarrolladores: lenguajes, frameworks y herramientas, con búsqueda, favoritos y copiado en un clic.">
+  <meta name="color-scheme" content="dark light">
+
+  <!-- Aplica el tema guardado antes de pintar para evitar parpadeos -->
+  <script>
+    (function () {
+      try {
+        var saved = JSON.parse(localStorage.getItem('cs:theme'));
+        var theme = saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Orden importa: datos → utilidades → render → ui → arranque -->
+  <script src="data.js" defer></script>
+  <script src="utils.js" defer></script>
+  <script src="render.js" defer></script>
+  <script src="ui.js" defer></script>
+  <script src="main.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Pagina para visualizar comandos de distintos lenguajes y frameworks</h1>
-        <h2>Indice</h2>
-        <div class="seccion">
-            <div class="cards">
-                <div class="card-frameworks">
-                    <h2>Frameworks</h2>
-                    <ul>
-                        <li>Angular</li>
-                        <li>React</li>
-                        <li>Django</li>
-                        <li>Laravel</li>
-                        <li>Spring Boot</li>
-                        <li>Flutter</li>
-                    </ul>
-                </div>
+  <a class="skip-link" href="#mainContent">Saltar al contenido</a>
 
-                <div class="card-lenguajes">
-                    <h2>Lenguajes</h2>
-                    <ul>
-                        <li>Python</li>
-                        <li>JavaScript</li>
-                        <li>Java</li>
-                        <li>C#</li>
-                        <li>PHP</li>
-                    </ul>
-                </div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="Comandos Esenciales, inicio">⚡ <span>Comandos</span></a>
 
-                <div class="card-herramientas">
-                    <h2>Herramientas</h2>
-                    <ul>
-                        <li><a href="#git">Git</a></li>
-                        <li><a href="#github">GitHub</a></li>
-                        <li><a href="#docker">Docker</a></li>
-                        <li><a href="#ngrok">Ngrok</a></li>
-                    </ul>
-                </div>
-            </div> 
-        </div>
-    </header>
+      <div class="search">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input id="search" type="search" placeholder="Busca un comando, una herramienta o una acción…"
+               aria-label="Buscar comandos" autocomplete="off" spellcheck="false">
+        <button id="clearSearch" class="search-clear" aria-label="Limpiar búsqueda" hidden>✕</button>
+        <kbd class="kbd" aria-hidden="true">/</kbd>
+      </div>
 
-    <main>
-        <hr>
-        <h2>Aqui iran los detalles de los comandos</h2>
+      <button id="themeToggle" class="icon-btn theme-btn" aria-label="Cambiar tema">☀️</button>
+    </div>
 
-        <div class="git">
-            <h3 id="git">Git</h3>
-            <ul>
-                <li>git init: Inicializa un nuevo repositorio Git en el directorio actual.</li>
-                <li>git clone [url]: Clona un repositorio remoto en tu máquina local.</li>
-                <li>git add [archivo]: Agrega un archivo específico al área de preparación (staging area).</li>
-                <li>git commit -m "mensaje": Crea un commit con los cambios agregados al área de preparación.</li>
-                <li>git push: Envía los commits locales a un repositorio remoto.</li>
-                <li>git pull: Obtiene y fusiona los cambios del repositorio remoto en tu rama actual.</li>
-                <li>git status: Muestra el estado de los archivos en el directorio de trabajo y el área de preparación.</li>
-                <li>git log: Muestra el historial de commits del repositorio.</li>
-            </ul>
-        </div>
+    <div class="topbar-inner chips-row">
+      <div id="chips" class="chips" role="group" aria-label="Filtrar por categoría"></div>
+    </div>
+  </header>
 
-        <div class="docker">
-            <h3 id="docker">Docker</h3>
-            <ul>
-                <li>docker build -t nombre_imagen .: Construye una imagen de Docker a partir del Dockerfile en el directorio actual.</li>
-                <li>docker run -d -p puerto_local:puerto_contenedor nombre_imagen: Ejecuta un contenedor en segundo plano y mapea los puertos.</li>
-                <li>docker ps: Muestra los contenedores en ejecución.</li>
-                <li>docker stop id_contenedor: Detiene un contenedor en ejecución.</li>
-                <li>docker rm id_contenedor: Elimina un contenedor detenido.</li>
-                <li>docker images: Muestra las imágenes de Docker disponibles en tu máquina.</li>
-                <li>docker rmi nombre_imagen: Elimina una imagen de Docker.</li>
-            </ul>
-        </div>
+  <div id="top" class="container">
+    <section class="hero">
+      <h1>Comandos Esenciales</h1>
+      <p class="subtitle">Cheat sheet para devs · Lenguajes, frameworks y herramientas</p>
+      <div id="stats" class="stats"></div>
+    </section>
 
-        <div class="ngrok">
-            <h3 id="ngrok">Ngrok</h3>
-            <ul>
-                <li>ngrok http puerto_local: Crea un túnel seguro a tu servidor local en el puerto especificado.</li>
-                <li>ngrok authtoken token: Configura tu token de autenticación para usar Ngrok con tu cuenta.</li>
-                <li>ngrok status: Muestra el estado actual de los túneles activos.</li>
-                <li>ngrok kill: Detiene todos los túneles activos.</li>
-            </ul>
-        </div>
-    </main>
+    <div class="layout">
+      <aside class="sidebar" aria-label="Índice de tecnologías">
+        <nav id="sidebarNav"></nav>
+      </aside>
+
+      <div class="content">
+        <p id="resultInfo" class="result-info" aria-live="polite"></p>
+        <main id="mainContent"></main>
+      </div>
+    </div>
 
     <footer>
-        <p>Derian J.</p>
+      <p>Derian J. · Comandos esenciales · 2026</p>
+      <p class="footer-hint">Atajos: <kbd class="kbd">/</kbd> buscar · <kbd class="kbd">Esc</kbd> limpiar</p>
     </footer>
+  </div>
+
+  <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba">↑</button>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <noscript><p class="noscript">Esta página necesita JavaScript para mostrar los comandos.</p></noscript>
 </body>
 </html>
